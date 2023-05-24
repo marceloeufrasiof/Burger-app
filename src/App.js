@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useRef, useEffect } from "react";
 import {
   Container,
   Image,
@@ -9,15 +9,44 @@ import {
   Button,
   Request,
 } from "./styles";
+import axios from "axios";
 import Image1 from "./Assets/burger1.png";
 import Arrow from "./Assets/arrow.svg";
 import Trash from "./Assets/trash.svg";
 
 function App() {
-  const requests = [
-    { id: Math.random(), order: "X-tudo", name: "Marcelo" },
-    { id: Math.random(), order: "Eggs X-salada", name: "Gislayne" },
-  ];
+  // const requests = [];
+  const [requests, setRequests] = useState([]);
+  const inputOrder = useRef();
+  const inputName = useRef();
+
+  async function addNewRequest() {
+    const { data: newRequest } = await axios.post(
+      "http://localhost:3001/users",
+      {
+        order: inputOrder.current.value,
+        name: inputName.current.value,
+      }
+    );
+    setRequests([...requests, newRequest]);
+  }
+
+  useEffect(() => {
+    async function fetchRequests() {
+      const { data: newRequests } = await axios.get(
+        "http://localhost:3001/users"
+      );
+
+      setRequests(newRequests);
+    }
+    fetchRequests();
+  }, [requests]);
+
+  async function deleteRequest(requestId) {
+    await axios.delete(`http://localhost:3001/users/${requestId}`)
+    const newRequests = requests.filter((request) => request.id !== requestId);
+    setRequests(newRequests);
+  }
 
   return (
     <Container>
@@ -28,13 +57,13 @@ function App() {
       <ContainerItens>
         <InputLabel> Pedido </InputLabel>
 
-        <Input placeholder="1 Coca-Cola, 1-X Salada "></Input>
+        <Input ref={inputOrder} placeholder="1 Coca-Cola, 1-X Salada "></Input>
 
         <InputLabel> Nome do cliente </InputLabel>
 
-        <Input placeholder="Steve Jobs"></Input>
+        <Input ref={inputName} placeholder="Steve Jobs"></Input>
 
-        <Button>
+        <Button onClick={addNewRequest}>
           Novo Pedido <img src={Arrow} alt="arrow" />
         </Button>
 
@@ -42,7 +71,7 @@ function App() {
           {requests.map((request) => (
             <Request key={request.id}>
               <p>{request.order}</p> <p>{request.name}</p>
-              <button>
+              <button onClick={() => deleteRequest(request.id)}>
                 <img src={Trash} alt="trash" />
               </button>
             </Request>
