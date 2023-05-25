@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef} from "react";
 import {
   Container,
   Image,
@@ -7,12 +7,10 @@ import {
   InputLabel,
   Input,
   Button,
-  Request,
 } from "./styles";
 import axios from "axios";
-import Image1 from "./Assets/burger1.png";
-import Arrow from "./Assets/arrow.svg";
-import Trash from "./Assets/trash.svg";
+import Image1 from "../../Assets/burger1.png";
+import Arrow from "../../Assets/arrow.svg";
 
 function App() {
   // const requests = [];
@@ -29,23 +27,6 @@ function App() {
       }
     );
     setRequests([...requests, newRequest]);
-  }
-
-  useEffect(() => {
-    async function fetchRequests() {
-      const { data: newRequests } = await axios.get(
-        "http://localhost:3001/users"
-      );
-
-      setRequests(newRequests);
-    }
-    fetchRequests();
-  }, [requests]);
-
-  async function deleteRequest(requestId) {
-    await axios.delete(`http://localhost:3001/users/${requestId}`)
-    const newRequests = requests.filter((request) => request.id !== requestId);
-    setRequests(newRequests);
   }
 
   return (
@@ -66,17 +47,6 @@ function App() {
         <Button onClick={addNewRequest}>
           Novo Pedido <img src={Arrow} alt="arrow" />
         </Button>
-
-        <ul>
-          {requests.map((request) => (
-            <Request key={request.id}>
-              <p>{request.order}</p> <p>{request.name}</p>
-              <button onClick={() => deleteRequest(request.id)}>
-                <img src={Trash} alt="trash" />
-              </button>
-            </Request>
-          ))}
-        </ul>
       </ContainerItens>
     </Container>
   );

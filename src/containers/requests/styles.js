@@ -10,6 +10,7 @@ export const Container = styled.div`
 
 export const Image = styled.img`
   margin-top: 11px;
+  
 `;
 
 export const H1 = styled.h1`
@@ -35,30 +36,12 @@ export const InputLabel = styled.p`
   font-weight: 700;
 `;
 
-export const Input = styled.input`
-  width: 342px;
-  height: 58px;
-  background: rgba(255, 255, 255, 0.25);
-  border-radius: 14px;
-  border: none;
-  outline: none;
-
-  font-size: 18px;
-  color: #ffffff;
-  padding-left: 15px;
-  margin-bottom: 42px;
-  font-style: normal;
-  font-weight: 300;
-
-  &::placeholder {
-    color: white;
-  }
-`;
 
 export const Button = styled.button`
   width: 342px;
   height: 68px;
-  background: linear-gradient(to right, #d93856, rgb(74, 39, 110));
+  background: rgba(255, 255, 255, 0.14);
+  margin-top: 50px;
 
   font-size: 17px;
   color: #ffffff;
@@ -73,6 +56,11 @@ export const Button = styled.button`
   gap: 20px;
   cursor: pointer;
   border-radius: 14px;
+
+  img{
+    transform: rotateY(180deg);
+  }
+  
 
   &:hover {
     animation-name: buttonAnimation;
@@ -104,7 +92,7 @@ export const Request = styled.li`
   align-items: center;
 
   width: 342px;
-  height: 58px;
+  height: 101px;
   background: rgba(255, 255, 255, 0.25);
   border-radius: 14px;
   border: none;
