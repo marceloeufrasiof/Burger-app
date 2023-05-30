@@ -44,7 +44,7 @@ function App() {
 
         <Input ref={inputName} placeholder="Steve Jobs"></Input>
 
-        <Button onClick={addNewRequest}>
+        <Button to="/requests" onClick={addNewRequest}>
           Novo Pedido <img src={Arrow} alt="arrow" />
         </Button>
       </ContainerItens>

@@ -6,6 +6,7 @@ import {
   ContainerItens,
   Button,
   Request,
+  DivOrder,
 } from "./styles";
 import axios from "axios";
 import Image2 from "../../Assets/burger2.png";
@@ -44,7 +45,9 @@ function Requests() {
         <ul>
           {requests.map((request) => (
             <Request key={request.id}>
+              <DivOrder>
               <p>{request.order}</p> <p>{request.name}</p>
+              </DivOrder>
               <button onClick={() => deleteRequest(request.id)}>
                 <img src={Trash} alt="trash" />
               </button>
@@ -52,10 +55,11 @@ function Requests() {
           ))}
         </ul>
 
-        <Button>
+        
+      </ContainerItens>
+      <Button to="/">
           <img src={Arrow} alt="arrow" /> Voltar
         </Button>
-      </ContainerItens>
     </Container>
   );
 }

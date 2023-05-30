@@ -1,12 +1,11 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import Home from "./containers/Home"
-import Requests from "./containers/requests"
-import GlobalStyle from "./globalStyle";
+import Routes from "./routes";
+import GlobalStyle from "./styles/globalStyle";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <>
-    <Requests/> <GlobalStyle />{" "}
+    <Routes /> <GlobalStyle />{" "}
   </>
 );
